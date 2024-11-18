@@ -3,6 +3,7 @@ import { CuboidCollider, Physics } from "@react-three/rapier"
 import { useState } from "react"
 import { useSocket } from "../context/socketContext"
 import Food from "./Food"
+import Obstacle from "./Obstacle"
 import OtherPlayer from "./OtherPlayer"
 import Player from "./Player"
 
@@ -53,6 +54,11 @@ const Experience = () => {
         {/* Food */}
         {foods.map((food) => (
           <Food key={food.id} position={[food.x, 0.05, food.y]} size={food.size} debug={debug} />
+        ))}
+
+        {/* Obstacles */}
+        {obstacles.map((obstacle) => (
+          <Obstacle key={obstacle.id} position={[obstacle.x, 0.05, obstacle.y]} size={obstacle.size} debug={debug} />
         ))}
 
         {/* Lights */}
