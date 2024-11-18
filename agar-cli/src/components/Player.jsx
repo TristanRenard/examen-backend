@@ -57,7 +57,7 @@ const Player = ({ position, size, debug }) => {
         mass={2}
       />
       <mesh ref={meshRef} castShadow>
-        <cylinderGeometry args={[0.5 * size, 0.5 * size, 0.3, 16]} />
+        <cylinderGeometry args={[0.5 * size, 0.5 * size, 0.3, 32]} />
         <meshToonMaterial color="red" wireframe={debug} />
       </mesh>
     </Ecctrl>
