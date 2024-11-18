@@ -1,13 +1,13 @@
 
-const gridSize = 10
+const gridSize = 200
 const initialPlayerSize = 1
 const foodSize = 0.3
-const foodCount = 5
+const foodCount = 600
 const foodValue = 1
 const playerSpeed = 5
-const maxplayerSize = gridSize / 2
-const obstacleCount = 2
-const obstacleSize = 2
+const maxplayerSize = 15
+const obstacleCount = 160
+const obstacleSize = 3
 const port = 3001
 
 module.exports = {
