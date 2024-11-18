@@ -21,8 +21,6 @@ const Player = ({ position, size, debug }) => {
   }
   const { socket } = useSocket()
 
-  // État pour forcer la mise à jour du collider
-
   useFrame(() => {
     const position = ref?.current?.translation()
     if (position) {
@@ -52,7 +50,7 @@ const Player = ({ position, size, debug }) => {
       restitution={0}
       debug={debug}
     >
-      {/* Utilisation de la clé pour forcer le remount du collider */}
+      {/* recrate collider to get a smaller hit box to access to angles */}
       <CylinderCollider
         name="player"
         args={[0.1, Math.sqrt(((size * 0.5) ** 2) * 0.5)]}
