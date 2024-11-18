@@ -1,5 +1,7 @@
 # Agario like
 
+![rendu](image.png)
+
 Pour le lancer il faut lancer le serveur et le client, si vous lancer le serveur en premier, je vous recommandes de recharger la page du client.
 ```
 pnpm i
