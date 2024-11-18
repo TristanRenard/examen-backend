@@ -13,9 +13,9 @@ const Experience = () => {
 
   // Map clavier
   const keyboardMap = [
-    { name: "forward", keys: ["ArrowUp", "KeyW"] },
+    { name: "forward", keys: ["ArrowUp", "KeyW", "KeyZ"] },
     { name: "backward", keys: ["ArrowDown", "KeyS"] },
-    { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+    { name: "leftward", keys: ["ArrowLeft", "KeyA", "KeyQ"] },
     { name: "rightward", keys: ["ArrowRight", "KeyD"] },
   ]
 
