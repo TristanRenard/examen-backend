@@ -148,8 +148,6 @@ initializeObstacles()
 initializeFoods()
 
 
-
-const PORT = 3001
-server.listen(PORT, () => {
-  console.log(`Serveur en écoute sur http://localhost:${PORT}`)
+server.listen(config.port, () => {
+  console.log(`Serveur en écoute sur http://localhost:${config.port}`)
 })
