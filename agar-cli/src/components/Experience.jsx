@@ -23,20 +23,20 @@ const Experience = () => {
   return (
     <Physics debug={debug}>
       <KeyboardControls map={keyboardMap}>
-        {/* Sol et grille */}
+        {/* floor and grid */}
         <CuboidCollider name="floor" args={[config.gridSize / 2, 1, config.gridSize / 2]} position={[0, -1, 0]} />
         <Grid args={[config.gridSize, config.gridSize]} position={[0, 0, 0]} cellColor={"#d0d0d0"} cellSize={0.25} cellThickness={1} sectionSize={1} sectionColor={"#000"} />
 
-        {/* Murs */}
+        {/* Walls */}
         <CuboidCollider args={[config.gridSize / 2 + 1, config.gridSize / 2 + 1, 1]} position={[0, 0, config.gridSize / 2 + 1]} />
         <CuboidCollider args={[config.gridSize / 2 + 1, config.gridSize / 2 + 1, 1]} position={[0, 0, -(config.gridSize / 2 + 1)]} />
         <CuboidCollider args={[1, config.gridSize / 2 + 1, config.gridSize / 2 + 1]} position={[-(config.gridSize / 2 + 1), 0, 0]} />
         <CuboidCollider args={[1, config.gridSize / 2 + 1, config.gridSize / 2 + 1]} position={[config.gridSize / 2 + 1, 0, 0]} />
 
-        {/* Joueur principal */}
+        {/* self Player */}
         {localPlayer && <Player debug={debug} position={[localPlayer.x, 0.1, localPlayer.y]} size={localPlayer.size} score={localPlayer.score} />}
 
-        {/* Autres joueurs */}
+        {/* Other Players */}
         {players && Object.values(players).map((player) =>
           player.id !== localPlayer?.id ? (
             <OtherPlayer
@@ -50,12 +50,12 @@ const Experience = () => {
           ) : null
         )}
 
-        {/* Nourritures */}
+        {/* Food */}
         {foods.map((food) => (
           <Food key={food.id} position={[food.x, 0.05, food.y]} size={food.size} debug={debug} />
         ))}
 
-        {/* Lumières */}
+        {/* Lights */}
         <ambientLight intensity={0.5} />
         <directionalLight position={[0, 10, 0]} intensity={1} />
         <spotLight
