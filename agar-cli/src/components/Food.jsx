@@ -1,0 +1,8 @@
+const Food = ({ position, size }) => (
+  <mesh position={position}>
+    <cylinderGeometry args={[0.5 * size, 0.5 * size, 0.1, 32]} />
+    <meshToonMaterial color="green" />
+  </mesh>
+)
+
+export default Food
