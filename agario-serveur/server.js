@@ -71,8 +71,8 @@ const checkFoodCollision = (socket) => {
     if (distance < player.size * 0.5 + food.size * 0.5) {
       if (player.size < config.maxplayerSize) {
         player.size += config.foodValue
-        player.score += config.foodValue
       }
+      player.score += config.foodValue
       foods.splice(index, 1)
       io.emit('foodEaten', { foodId: food.id, playerId: socket.id })
       foods.push(generateFood())
