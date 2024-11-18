@@ -1,4 +1,3 @@
-import { Text } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { CylinderCollider } from "@react-three/rapier"
 import Ecctrl from "ecctrl"
@@ -6,13 +5,20 @@ import { useControls } from "leva"
 import { useRef, useState } from "react"
 import { useSocket } from "../context/socketContext"
 
-const Player = ({ position, size, score }) => {
+const Player = ({ position, size, debug }) => {
   const ref = useRef()
   const meshRef = useRef()
   const [lastPosition, setLastPosition] = useState({ x: 0, y: 0 })
 
-  const [{ pos }, set] = useControls(() => ({ position: position }))
-
+  if (debug) {
+    const [{ pos }, set] = useControls(() => ({ position: position }))
+    useFrame(() => {
+      const position = ref?.current?.translation()
+      if (position) {
+        set({ position: [position.x, position.y, position.z] })
+      }
+    })
+  }
   const { socket } = useSocket()
 
   // État pour forcer la mise à jour du collider
@@ -20,7 +26,6 @@ const Player = ({ position, size, score }) => {
   useFrame(() => {
     const position = ref?.current?.translation()
     if (position) {
-      set({ position: [position.x, position.y, position.z] })
       const x = Math.round(position.x * 1000) / 1000
       const y = Math.round(position.z * 1000) / 1000
       if (lastPosition.x !== x || lastPosition.y !== y) {
@@ -45,7 +50,7 @@ const Player = ({ position, size, score }) => {
       maxVelLimit={5}
       mass={200}
       restitution={0}
-      debug
+      debug={debug}
     >
       {/* Utilisation de la clé pour forcer le remount du collider */}
       <CylinderCollider
@@ -54,12 +59,9 @@ const Player = ({ position, size, score }) => {
         restitution={0}
         mass={2}
       />
-      <Text rotation={[Math.PI * 0.5, 0, 0]} position-y={1}>
-        {size}
-      </Text>
       <mesh ref={meshRef} castShadow>
         <cylinderGeometry args={[0.5 * size, 0.5 * size, 0.3, 16]} />
-        <meshToonMaterial color="red" wireframe />
+        <meshToonMaterial color="red" wireframe={debug} />
       </mesh>
     </Ecctrl>
   )

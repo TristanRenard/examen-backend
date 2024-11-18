@@ -1,5 +1,6 @@
 import { Grid, KeyboardControls } from "@react-three/drei"
 import { CuboidCollider, Physics } from "@react-three/rapier"
+import { useState } from "react"
 import { useSocket } from "../context/socketContext"
 import Food from "./Food"
 import OtherPlayer from "./OtherPlayer"
@@ -7,7 +8,8 @@ import Player from "./Player"
 
 const Experience = () => {
   const { localPlayer, players, foods, config, obstacles } = useSocket()
-  console.log(window)
+  const [debug, setDebug] = useState(window.location.hash === "#debug")
+
   // Map clavier
   const keyboardMap = [
     { name: "forward", keys: ["ArrowUp", "KeyW"] },
@@ -19,7 +21,7 @@ const Experience = () => {
   ]
 
   return (
-    <Physics>
+    <Physics debug={debug}>
       <KeyboardControls map={keyboardMap}>
         {/* Sol et grille */}
         <CuboidCollider name="floor" args={[config.gridSize / 2, 1, config.gridSize / 2]} position={[0, -1, 0]} />
@@ -32,7 +34,7 @@ const Experience = () => {
         <CuboidCollider args={[1, config.gridSize / 2 + 1, config.gridSize / 2 + 1]} position={[config.gridSize / 2 + 1, 0, 0]} />
 
         {/* Joueur principal */}
-        {localPlayer && <Player position={[localPlayer.x, 0.1, localPlayer.y]} size={localPlayer.size} score={localPlayer.score} />}
+        {localPlayer && <Player debug={debug} position={[localPlayer.x, 0.1, localPlayer.y]} size={localPlayer.size} score={localPlayer.score} />}
 
         {/* Autres joueurs */}
         {players && Object.values(players).map((player) =>
@@ -43,13 +45,14 @@ const Experience = () => {
               position={[player.x, 0.1, player.y]}
               size={player.size}
               color={player.color}
+              debug={debug}
             />
           ) : null
         )}
 
         {/* Nourritures */}
         {foods.map((food) => (
-          <Food key={food.id} position={[food.x, 0.05, food.y]} size={food.size} />
+          <Food key={food.id} position={[food.x, 0.05, food.y]} size={food.size} debug={debug} />
         ))}
 
         {/* Lumières */}
