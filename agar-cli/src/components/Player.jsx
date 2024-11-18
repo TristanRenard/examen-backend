@@ -46,8 +46,7 @@ const Player = ({ position, size, debug }) => {
       autoBalanceSpringOnY={0}
       camCollision={false}
       maxVelLimit={5}
-      mass={200}
-      restitution={0}
+      mass={100}
       debug={debug}
     >
       {/* recrate collider to get a smaller hit box to access to angles */}
