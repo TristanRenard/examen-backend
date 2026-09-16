@@ -13,7 +13,7 @@ const Player = ({ position, size, debug }) => {
   if (debug) {
     const [{ pos }, set] = useControls(() => ({ position: position }))
     useFrame(() => {
-      const position = ref?.current?.translation()
+      const position = ref?.current?.group?.translation()
       if (position) {
         set({ position: [position.x, position.y, position.z] })
       }
@@ -22,7 +22,7 @@ const Player = ({ position, size, debug }) => {
   const { socket } = useSocket()
 
   useFrame(() => {
-    const position = ref?.current?.translation()
+    const position = ref?.current?.group?.translation()
     if (position) {
       const x = Math.round(position.x * 1000) / 1000
       const y = Math.round(position.z * 1000) / 1000
