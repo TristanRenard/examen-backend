@@ -5,7 +5,7 @@ import { io } from "socket.io-client"
 const SocketContext = createContext()
 
 export const SocketProvider = ({ children }) => {
-  const socket = useMemo(() => io("https://agar-api.celeste-renard.com"), []) // Une seule instance de socket
+  const socket = useMemo(() => io("https://agar-serv.celeste.monster/"), []) // Une seule instance de socket
   const [players, setPlayers] = useState({})
   const [foods, setFoods] = useState([])
   const [obstacles, setObstacles] = useState([])
